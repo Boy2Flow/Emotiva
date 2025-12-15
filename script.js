@@ -78,10 +78,13 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Intersection Observer for fade-in animations
+
+// Intersection Observer for fade-in animations - Optimized for mobile
+const isMobile = window.innerWidth <= 768;
+
 const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: isMobile ? 0.05 : 0.1, // Activar antes en móviles
+    rootMargin: isMobile ? '0px 0px 100px 0px' : '0px 0px -50px 0px' // Margen positivo en móviles
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -89,6 +92,8 @@ const observer = new IntersectionObserver((entries) => {
         if (entry.isIntersecting) {
             entry.target.style.opacity = '1';
             entry.target.style.transform = 'translateY(0)';
+            // Dejar de observar después de animar (mejor rendimiento)
+            observer.unobserve(entry.target);
         }
     });
 }, observerOptions);
@@ -101,6 +106,20 @@ animateElements.forEach(el => {
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
 });
+
+// Re-configurar observer si cambia el tamaño de ventana
+let resizeTimer;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        // Solo recargar si cambia entre móvil y desktop
+        const nowMobile = window.innerWidth <= 768;
+        if (nowMobile !== isMobile) {
+            location.reload();
+        }
+    }, 250);
+});
+
 
 // Image lazy loading
 if ('loading' in HTMLImageElement.prototype) {

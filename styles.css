@@ -813,22 +813,51 @@ body {
     }
 
     .feature-card {
-        padding: var(--spacing-md);
-    }
-
-    .feature-card h3 {
-        font-size: 1.5rem;
+        padding: 1.25rem;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        /* Icono a la izquierda, texto a la derecha */
+        grid-template-rows: auto auto;
+        column-gap: 1.25rem;
+        row-gap: 0.25rem;
+        align-items: center;
+        /* Alinear verticalmente */
+        text-align: left;
     }
 
     .feature-icon {
-        width: 70px;
-        height: 70px;
+        grid-row: 1 / -1;
+        /* El icono ocupa ambas filas de texto */
+        width: 56px;
+        height: 56px;
+        margin: 0;
     }
 
     .feature-icon svg {
-        width: 35px;
-        height: 35px;
+        width: 28px;
+        height: 28px;
     }
+
+    .feature-card h3 {
+        grid-column: 2;
+        font-size: 1.25rem;
+        margin: 0;
+        align-self: end;
+        /* Pegado al texto de abajo */
+    }
+
+    .feature-card p {
+        grid-column: 2;
+        font-size: 0.95rem;
+        margin: 0;
+        line-height: 1.4;
+        opacity: 0.9;
+        align-self: start;
+        /* Pegado al título de arriba */
+    }
+
+    /* Eliminar el selector hijo div que no existe */
+
 
     /* Highlights Mobile */
     .highlights {

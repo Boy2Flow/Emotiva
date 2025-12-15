@@ -127,7 +127,7 @@ Emotiva/
 ### Opción 1: Visualización Local
 ```bash
 # Clonar el repositorio
-git clone https://github.com/TU_USUARIO/emotiva.git
+git clone https://github.com/Boy2Flow/emotiva.git
 
 # Navegar al directorio
 cd emotiva
@@ -138,7 +138,8 @@ cd emotiva
 
 ### Opción 2: GitHub Pages
 El sitio está hosteado en GitHub Pages:
-**[https://TU_USUARIO.github.io/emotiva/](https://TU_USUARIO.github.io/emotiva/)**
+**[https://boy2flow.github.io/emotiva/](https://boy2flow.github.io/emotiva/)**
+
 
 ---
 
