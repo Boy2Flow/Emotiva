@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo de Mejoras Móviles - Emotiva</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+            color: #FFFFFF;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #FFB800 0%, #FF8C00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-weight: 900;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #CCCCCC;
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .demo-card {
+            background: rgba(42, 42, 42, 0.5);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 184, 0, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .demo-card:hover {
+            border-color: #FFB800;
+            box-shadow: 0 0 30px rgba(255, 184, 0, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .demo-card h2 {
+            color: #FFB800;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .icon {
+            font-size: 2rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .feature-list li {
+            padding: 0.7rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #CCCCCC;
+            border-bottom: 1px solid rgba(255, 184, 0, 0.1);
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #FFB800;
+            font-weight: 700;
+        }
+
+        .breakpoints {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .breakpoint {
+            background: rgba(196, 30, 58, 0.1);
+            border: 1px solid rgba(196, 30, 58, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .breakpoint-size {
+            font-size: 1.5rem;
+            color: #FFB800;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .breakpoint-desc {
+            font-size: 0.9rem;
+            color: #CCCCCC;
+        }
+
+        .code-block {
+            background: #0A0A0A;
+            border: 1px solid rgba(255, 184, 0, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            overflow-x: auto;
+        }
+
+        .code-block code {
+            color: #FFB800;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .before,
+        .after {
+            padding: 1.5rem;
+            border-radius: 15px;
+        }
+
+        .before {
+            background: rgba(139, 0, 0, 0.1);
+            border: 2px solid rgba(139, 0, 0, 0.3);
+        }
+
+        .after {
+            background: rgba(40, 167, 69, 0.1);
+            border: 2px solid rgba(40, 167, 69, 0.3);
+        }
+
+        .comparison h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .before h3 {
+            color: #DC143C;
+        }
+
+        .after h3 {
+            color: #28a745;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat {
+            background: linear-gradient(135deg, #C41E3A 0%, #8B0000 100%);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #FFB800;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #FFFFFF;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, rgba(196, 30, 58, 0.3) 0%, rgba(10, 10, 10, 0.5) 100%);
+            border: 2px solid #FFB800;
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            color: #FFB800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: #CCCCCC;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #FFB800 0%, #FF8C00 100%);
+            color: #0A0A0A;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(255, 184, 0, 0.8);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section {
+                padding: 2rem 1rem;
+            }
+
+            .cta-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📱 Mejoras Móviles Implementadas</h1>
+        <p class="subtitle">Versión 2.0 - Optimización Premium para Dispositivos Móviles</p>
+
+        <div class="demo-grid">
+            <div class="demo-card">
+                <h2><span class="icon">🎯</span> Navegación Mejorada</h2>
+                <ul class="feature-list">
+                    <li>Menú hamburguesa con animación premium</li>
+                    <li>Transformación del icono (hamburguesa → X)</li>
+                    <li>Backdrop blur glassmorphism</li>
+                    <li>Animaciones escalonadas por enlace</li>
+                    <li>Cierre automático inteligente</li>
+                    <li>Prevención de scroll del body</li>
+                </ul>
+            </div>
+
+            <div class="demo-card">
+                <h2><span class="icon">📐</span> Responsive Design</h2>
+                <ul class="feature-list">
+                    <li>4 breakpoints principales</li>
+                    <li>Tipografía fluida con clamp()</li>
+                    <li>Espaciado adaptativo</li>
+                    <li>Grids responsive automáticos</li>
+                    <li>Optimización landscape</li>
+                    <li>Variables CSS dinámicas</li>
+                </ul>
+            </div>
+
+            <div class="demo-card">
+                <h2><span class="icon">🖱️</span> Táctil Optimizado</h2>
+                <ul class="feature-list">
+                    <li>Botones mínimo 48px altura</li>
+                    <li>Ancho completo en móviles</li>
+                    <li>Font-size 16px en inputs (no zoom iOS)</li>
+                    <li>Padding aumentado para touch</li>
+                    <li>Espaciado entre elementos</li>
+                    <li>Áreas de toque generosas</li>
+                </ul>
+            </div>
+
+            <div class="demo-card">
+                <h2><span class="icon">♿</span> Accesibilidad</h2>
+                <ul class="feature-list">
+                    <li>Soporte prefers-reduced-motion</li>
+                    <li>Soporte prefers-contrast: high</li>
+                    <li>Navegación por teclado completa</li>
+                    <li>Cierre con tecla Escape</li>
+                    <li>Focus states mejorados</li>
+                    <li>WCAG 2.1 AA compatible</li>
+                </ul>
+            </div>
+
+            <div class="demo-card">
+                <h2><span class="icon">🚀</span> Rendimiento</h2>
+                <ul class="feature-list">
+                    <li>Animaciones GPU-accelerated</li>
+                    <li>Transform y opacity optimizados</li>
+                    <li>Cubic-bezier suave</li>
+                    <li>Sin JavaScript bloqueante</li>
+                    <li>Lazy loading preparado</li>
+                    <li>Viewport units modernos (svh)</li>
+                </ul>
+            </div>
+
+            <div class="demo-card">
+                <h2><span class="icon">🎨</span> Diseño Premium</h2>
+                <ul class="feature-list">
+                    <li>Glassmorphism en menú</li>
+                    <li>Gradientes consistentes</li>
+                    <li>Sombras adaptativas</li>
+                    <li>Bordes redondeados</li>
+                    <li>Micro-animaciones</li>
+                    <li>Paleta de colores coherente</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="demo-card">
+            <h2><span class="icon">📏</span> Breakpoints Implementados</h2>
+            <div class="breakpoints">
+                <div class="breakpoint">
+                    <div class="breakpoint-size">≤ 480px</div>
+                    <div class="breakpoint-desc">Small Mobile</div>
+                </div>
+                <div class="breakpoint">
+                    <div class="breakpoint-size">≤ 768px</div>
+                    <div class="breakpoint-desc">Mobile</div>
+                </div>
+                <div class="breakpoint">
+                    <div class="breakpoint-size">≤ 968px</div>
+                    <div class="breakpoint-desc">Tablet</div>
+                </div>
+                <div class="breakpoint">
+                    <div class="breakpoint-size">> 968px</div>
+                    <div class="breakpoint-desc">Desktop</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="comparison">
+            <div class="before">
+                <h3>❌ Antes</h3>
+                <ul class="feature-list">
+                    <li>Menú básico sin animaciones</li>
+                    <li>Tipografía fija</li>
+                    <li>Botones pequeños (difícil tocar)</li>
+                    <li>Espaciado inconsistente</li>
+                    <li>Sin optimización táctil</li>
+                    <li>Landscape no optimizado</li>
+                    <li>Sin accesibilidad mejorada</li>
+                </ul>
+            </div>
+            <div class="after">
+                <h3>✅ Después</h3>
+                <ul class="feature-list">
+                    <li>Menú premium con animaciones</li>
+                    <li>Tipografía fluida (clamp)</li>
+                    <li>Botones táctiles (≥48px)</li>
+                    <li>Espaciado adaptativo</li>
+                    <li>100% optimización táctil</li>
+                    <li>Landscape optimizado</li>
+                    <li>WCAG 2.1 AA compatible</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">+400</div>
+                <div class="stat-label">Líneas CSS</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Breakpoints</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Responsive</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">48px</div>
+                <div class="stat-label">Touch Target</div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>🎉 ¡Experiencia Móvil Premium!</h2>
+            <p>El sitio ahora ofrece una experiencia optimizada para todos los dispositivos móviles</p>
+            <a href="index.html" class="btn">Ver Sitio Principal</a>
+        </div>
+    </div>
+</body>
+
+</html>
